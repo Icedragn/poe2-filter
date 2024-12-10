@@ -1,0 +1,2793 @@
+#------------------------------------------------#
+# Icedragn's PoE2 Filter Base - Updated 2024/12/09
+# AUTHOR: Icedragn
+# VERSION: 0.1.2
+# DISCORD: icedragn
+#------------------------------------------------#
+
+#---------------------------------------------#
+# !!! READ ME !!!
+# THIS FILTER IS VERY BARE BONES; by default this filter does NOT hide anything, it simple changes highlighting/drop sounds/drop effects/minimap icons
+
+# If you would like to customize this filter to your needs, please refer to the sections outlined in the table of contents below. You can ctrl + f section numbers in order to navigate to that part of the filter. 
+
+# To change a subset of items (e.g. crossbows) from showing to hiding, refer to each section on crossbows and change the corresponding rules from "Show" to "Hide"
+
+# Any section not filled out and/or marked as TODO has not yet been implemented and will be in a future version
+
+# Sound levels in this filter may be lower than you are used to - I do not have every sound set to 300, fair warning when swapping to (many) other filters after using this one, they may be loud
+
+# If any items show up in BRIGHT PINK please send me a message on Discord (icedragn) or add an isuse on GitHub so I can fix it for future versions
+#---------------------------------------------#
+
+##################################
+# TABLE OF CONTENTS
+# Section 0 - Syntax and Utilities
+# Section 1 - Custom Highlights + Levelling
+	# Section 1.1 - Custom Highlights
+	# Section 1.2 - Priority Bases
+	# Section 1.3 - Levelling
+		# Section 1.3.1.1. - Levelling Currency (TODO)
+		# Section 1.3.1.2 - Levelling Flasks
+# Section 2 - Currency
+	# Section 2.1 - Gold
+	# Section 2.1 - Single Currency
+	# Section 2.2 - Stacked Currency (TODO?)
+# Section 3 - Waystones & Tablets
+	# Section 3.1 - Unique Waystones
+	# Section 3.2 - T14+ Waystones
+	# Section 3.3 - T11-T13 Waystones
+	# Section 3.4 - Yellow Waystones
+	# Section 3.5 - White Waystones
+	# Section 3.6 - Tablets
+# Section 4 - Uniques
+	# Section 4.1 - T0 Uniques (TODO)
+	# Section 4.2 - T1 Uniques (TODO)
+	# Section 4.3 - T2 Uniques (TODO)
+	# Section 4.4 - Special Uniques (TODO)
+	# Section 4.5 - High Quality Uniques (TODO?)
+	# Section 4.6 - Hidden Uniques (TODO)
+	# Section 4.7 - Unique Catch-All
+# Section 5 - League Specific Items
+	# Section 5.1 - Breach
+		# Section 5.1.1 - Breach Rings
+		# Section 5.1.2 - Breach Splinters/Stones
+		# Section 5.1.3 - Catalysts
+	# Section 5.2 - Delirium
+		# Section 5.2.1 - Distilled Emotions
+		# Section 5.2.2 - Simulacrum Splinters/Simulacrum
+	# Section 5.3 - Essence
+		# Section 5.3.1 - Greater Essences
+		# Section 5.3.2 - Essences
+	# Section 5.4 - Expedition
+		# Section 5.4.1 - Artifacts
+		# Section 5.4.2 - Logbooks
+	# Section 5.5 - Ritual
+		# Section 5.5.1 - Omens
+	# Section 5.6 - Sanctum (Trial of the Sekhemas)
+		# Section 5.6.1 - Djinn Barya
+		# Section 5.6.2 - Relics
+	# Section 5.7 - Ultimatum (Trial of Chaos)
+		# Section 5.7.1 - Inscribed Ultimatums
+		# Section 5.7.2 - Soul Cores
+# Section 6 - Tiered Items (TODO - not currently implemented)
+# Section 7 - Rare Jewellery (TODO - bare bones for now, no tiering)
+	# Section 7.1 - Amulets
+	# Section 7.2 - Rings
+	# Section 7.3 - Belts
+# Section 8 - Rare Armour
+	# Section 8.1 - Helmets
+		# Section 8.1.1 - Str Helmets
+		# Section 8.1.2 - Dex Helmets
+		# Section 8.1.3 - Int Helmets
+		# Section 8.1.4 - Str/Dex Helmets
+		# Section 8.1.5 - Str/Int Helmets
+		# Section 8.1.6 - Dex/Int Helmets
+		# Section 8.1.7 - Str/Dex/Int Helmets
+		# Section 8.1.8 - Special Helmets
+	# Section 8.2 - Body Armours
+		# Section 8.2.1 - Str Body Armours
+		# Section 8.2.2 - Dex Body Armours
+		# Section 8.2.3 - Int Body Armours
+		# Section 8.2.4 - Str/Dex Body Armours
+		# Section 8.2.5 - Str/Int Body Armours
+		# Section 8.2.6 - Dex/Int Body Armours
+		# Section 8.2.7 - Str/Dex/Int Body Armours
+		# Section 8.2.8 - Special Body Armours
+	# Section 8.3 - Gloves
+		# Section 8.3.1 - Str Gloves
+		# Section 8.3.2 - Dex Gloves
+		# Section 8.3.3 - Int Gloves
+		# Section 8.3.4 - Str/Dex Gloves
+		# Section 8.3.5 - Str/Int Gloves
+		# Section 8.3.6 - Dex/Int Gloves
+		# Section 8.3.7 - Str/Dex/Int Gloves
+		# Section 8.3.8 - Special Gloves
+	# Section 8.4 - Boots
+		# Section 8.4.1 - Str Boots
+		# Section 8.4.2 - Dex Boots
+		# Section 8.4.3 - Int Boots
+		# Section 8.4.4 - Str/Dex Boots
+		# Section 8.4.5 - Str/Int Boots
+		# Section 8.4.6 - Dex/Int Boots
+		# Section 8.4.7 - Str/Dex/Int Boots
+		# Section 8.4.8 - Special Boots
+	# Section 8.5 - Shields
+		# Section 8.5.1 - Str Shields
+		# Section 8.5.2 - Dex Shields
+		# Section 8.5.4 - Str/Dex Shields
+		# Section 8.5.5 - Str/Int Shields
+	# Section 8.6 - Foci
+# Section 9 - Rare Weapons
+	# Section 9.1 - Bows
+	# Section 9.2 - Claws
+	# Section 9.3 - Crossbows
+	# Section 9.4 - Daggers
+	# Section 9.5 - Flails
+	# Section 9.6 - One Hand Axes
+	# Section 9.7 - One Hand Maces
+	# Section 9.8 - One Hand Swords
+	# Section 9.9 - Quarterstaves
+	# Section 9.10 - Quivers
+	# Section 9.11 - Sceptres
+	# Section 9.12 - Spears
+	# Section 9.13 - Staves
+	# Section 9.14 - Traps
+	# Section 9.15 - Two Hand Axes
+	# Section 9.16 - Two Hand Maces
+	# Section 9.17 - Two Hand Swords
+	# Section 9.18 - Wands
+# Section 10 - Jewels
+	# Section 10.1 - Rare Jewels
+	# Section 10.2 - Magic Jewels
+# Section 11 - Runes
+# Section 12 - Flasks & Charms
+	# Section 12.1 - Life Flasks
+	# Section 12.2 - Mana Flasks
+	# Section 12.3 - Charms
+# Section 13 - Gems
+	# Section 13.1 - Uncut Gems
+		# Section 13.1.1 - Uncut Skill Gems
+		# Section 13.1.2 - Uncut Support Gems
+		# Section 13.1.3 - Uncut Spirit Gems
+	# Section 13.2 - Cut Gems
+		# Section 13.2.1 - Skill Gems
+		# Section 13.2.2 - Support Gems
+# Section 15 - Misc
+	# Section 15.1 - Quest Items
+	# Section 15.2 - Fishing
+# Section 16 - Catch Alls
+	# Section 16.1 - Hide Normal/Magic Jewellery, Armour and Weapons (RULES DISABLED)
+	# Section 16.2 - Hide Rare Jewellery, Armour and Weapons (RULES DISABLED)
+	# Section 16.3 - Show All
+##################################
+
+##################################
+# Section 0 - Syntax and Utilities
+##################################
+#------------------------#
+# FILTER COULOURS
+# (Based on NeverSink's Azurite theme)
+# BLUE (high tier, always pick up): 0 148 255
+# LIGHT BLUE (mid tier, almost always pick up): 130 214 255
+# TEAL (low tier, usually pick up if showing): 61 156 136
+# BLACK (most text/border colour): 0 0 0
+# WHITE (bases, waystones, high tier text/border colour): 255 255 255
+# ORANGE (uniques): 209 87 6
+# YELLOW (rares): 220 220 0
+# RED (life flasks/charms?): 188 23 5
+# POWDER BLUE (magic jewels/mana flasks): 0 75 250
+# PURPLE (breach rings): 136 0 255
+# TEAL 2 (gems): 30 190 190
+# AQUA (relics): 0 240 190
+# GOLD (gold): 255 205 0
+#------------------------#
+
+#------------------------#
+# FILTER SOUNDS
+# 1 - high tier currency
+# 2 - mid tier currency
+# 3 - low/mid tier unique
+# 4 - tiered maps
+# 5 - guardian/conqueror/synthesis/blighted maps
+# 6 - top tier currency / unique
+# 7 - 
+# 8 - 
+# 9 - 
+# 10 - 
+# 11 - 
+# 12 - 
+# 13 - 
+# 14 - 
+# 15 - 
+# 16 - 
+#------------------------#
+
+#------------------------#
+# GENERIC RULE BUILDING UTILITIES
+# WEAPON CLASSES: "Bows" "Claws" "Crossbows" "Daggers" "Flails" "One Hand Axes" "One Hand Maces" "One Hand Swords" "Quarterstaves" "Sceptres" "Spears" "Staves" "Traps" "Two Hand Axes" "Two Hand Maces" "Two Hand Swords" "Wands"
+# ARMOUR CLASSES: "Gloves" "Body Armours" "Boots" "Helmets" "Shields" "Foci"
+# JEWELLERY CLASSES: "Amulets" "Rings" "Belts"
+#------------------------#
+
+#------------------------#
+# FILTER RULES (https://www.poewiki.net/wiki/Guide:Item_filter_guide)
+#------------------------#
+
+###########################################
+# Section 1 - Custom Highlights + Levelling
+###########################################
+#------Section 1.1 - Custom Highlights------#
+	
+#------Section 1.2 - Priority Bases------#
+#Show
+#	BaseType "Vermillion Ring" "Amethyst Ring"
+#	ItemLevel >= 68
+#	Rarity <= "Rare"
+#	SetTextColor 255 255 255
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+
+#------Section 1.3 - Levelling------#
+#------Section 1.3.1 - Generic Levelling------#
+# Section 1.3.1.1 - Levelling Currency (TODO)
+
+# Section 1.3.1.2 - Levelling Flasks
+Show
+	Class "Life Flasks"
+	SetBorderColor 188 23 5
+	SetBackgroundColor 0 0 0
+	SetFontSize 35
+	AreaLevel <= 64
+	DisableDropSound
+	
+Show
+	Class "Mana Flasks"
+	SetBorderColor 0 75 250
+	SetBackgroundColor 0 0 0
+	SetFontSize 35
+	AreaLevel <= 64
+	DisableDropSound
+
+######################
+# Section 2 - Currency
+######################
+#------Section 2.1 - Gold------#
+Show # Large Stacks
+	BaseType "Gold"
+	Class "Stackable Currency"
+	StackSize >= 1000
+	SetTextColor 255 204 0
+	SetBorderColor 255 204 0
+	SetFontSize 35
+	MinimapIcon 1 Yellow Star
+	DisableDropSound
+	
+Show # Medium Stacks
+	BaseType "Gold"
+	Class "Stackable Currency"
+	StackSize >= 250
+	SetTextColor 255 204 0
+	SetBorderColor 255 204 0
+	SetFontSize 30
+	DisableDropSound
+
+Show # Small Stacks
+	BaseType "Gold"
+	Class "Stackable Currency"
+	SetTextColor 255 204 0
+	SetBorderColor 255 204 0
+	DisableDropSound
+
+#------Section 2.2 - Single Currency------#
+Show
+	BaseType "Mirror of Kalandra" "Divine Orb" "Perfect Jeweller's Orb"
+	Class "Currency"
+	SetTextColor 0 148 255
+	SetBackgroundColor 255 255 255
+	SetBorderColor 0 148 255
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+
+Show
+	BaseType "Exalted Orb" "Orb of Annulment" "Greater Jeweller's Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 75
+	PlayEffect Red
+	DisableDropSound
+
+Show
+	BaseType "Regal Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Chaos Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Orb of Alchemy"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Vaal Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Orb of Chance"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Glassblower's Bauble"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Gemcutter's Prism"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Artificer's Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Alchemy Shard" "Chance Shard" "Artificer's Shard" "Regal Shard"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Lesser Jeweller's Orb"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Orb of Transmutation"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Orb of Augmentation"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Blacksmith's Whetstone"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Arcanist's Etcher"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Armourer's Scrap"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 White Circle
+	PlayEffect Grey
+	DisableDropSound
+	
+Show
+	BaseType "Transmutation Shard" 
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show
+	BaseType "Scroll of Wisdom"
+	Class "Currency"
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 30
+	DisableDropSound
+	
+#------Section 2.2 - Stacked Currency------# (TODO)
+Show
+	BaseType "Scroll of Wisdom"
+	Class "Currency"
+	StackSize >= 3
+	SetTextColor 0 238 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 0 238 255
+	SetFontSize 45
+	DisableDropSound
+	
+#################################
+# Section 3 - Waystones & Tablets
+#################################
+#------Section 3.1 - Unique Waystones------#
+Show
+	Class "Waystones"
+	Rarity "Unique"
+	SetTextColor 209 87 6
+	SetBackgroundColor 0 0 0
+	SetBorderColor 209 87 6
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 Orange Square
+	PlayEffect Orange
+	DisableDropSound
+	
+#------Section 3.2 - T14+ Waystones------#
+Show
+	Class "Waystones"
+	WaystoneTier >= 14
+	SetTextColor 0 0 0
+	SetBackgroundColor 235 235 235
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 Red Square
+	PlayEffect Red
+	DisableDropSound
+
+#------Section 3.3 - T11-13 Waystones------#
+Show
+	Class "Waystones"
+	WaystoneTier >= 11
+	SetTextColor 0 0 0
+	SetBackgroundColor 200 200 200
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 Red Square
+	PlayEffect Red
+	DisableDropSound
+	
+#------Section 3.4 - Yellow Waystones------#
+Show
+	Class "Waystones"
+	WaystoneTier >= 6
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 Yellow Square
+	PlayEffect Yellow
+	DisableDropSound
+
+#------Section 3.5 - White Waystones------#
+Show
+	Class "Waystones"
+	WaystoneTier >= 1
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 White Square
+	PlayEffect White
+	DisableDropSound
+	
+#------Section 3.6 - Tablets------#
+Show
+	Class "Tablet"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 2 75
+	MinimapIcon 1 Blue Square
+	PlayEffect Blue
+	DisableDropSound
+
+#####################
+# Section 4 - Uniques
+#####################
+#------Section 4.1 - T0 Uniques------# (TODO)
+#------Section 4.2 - T1 Uniques------# (TODO)
+#------Section 4.3 - T2 Uniques------# (TODO)
+#------Section 4.4 - Special Uniques------# (TODO)
+#------Section 4.5 - High Quality Uniques------# (TODO)
+#------Section 4.6 - Hidden Uniques------# (TODO)
+
+#------Section 4.7 - Unique Catch-All ------#
+Show
+	Rarity Unique
+	SetTextColor 209 87 6
+	SetBackgroundColor 0 0 0
+	SetBorderColor 209 87 6
+	SetFontSize 45
+	MinimapIcon 1 Orange Cross
+	PlayAlertSound 3 75
+	PlayEffect Orange
+	DisableDropSound
+	
+###################################
+# Section 5 - League Specific Items
+###################################
+#------Section 5.1 - Breach------#
+# Section 5.1.1 - Breach Rings
+Show
+	BaseType "Breach Ring"
+	Class "Rings"
+	SetTextColor 0 0 0
+	SetBackgroundColor 136 0 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 2 75
+	MinimapIcon 1 Purple Diamond
+	PlayEffect Purple
+	DisableDropSound
+	
+# Section 5.1.2 - Breach Splinters/Stones
+Show
+	BaseType "Breach Splinter"
+	Class "Stackable Currency"
+	SetTextColor 136 0 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 136 0 255
+	SetFontSize 45
+	MinimapIcon 1 Yellow Kite
+	PlayEffect Purple
+	DisableDropSound
+	
+Show
+	Class "Breachstones"
+	SetTextColor 136 0 255
+	SetBackgroundColor 255 255 255
+	SetBorderColor 136 0 255
+	SetFontSize 45
+	PlayAlertSound 6 75
+	MinimapIcon 1 Purple Circle
+	PlayEffect Purple
+	DisableDropSound
+
+# Section 5.1.3 - Catalysts
+Show
+	BaseType "Adaptive Catalyst" "Carapace Catalyst" "Chayula's Catalyst" "Esh's Catalyst" "Flesh Catalyst" "Neural Catalyst" "Reaver Catalyst" "Sibilant Catalyst" "Skittering Catalyst" "Tul's Catalyst" "Uul-Netol's Catalyst" "Xoph's Catalyst"
+	Class "Stackable Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+
+#------Section 5.2 - Delirium------#
+# Section 5.2.1 - Distilled Emotions
+Show
+	BaseType "Distilled Despair" "Distilled Disgust" "Distilled Envy" "Distilled Fear" "Distilled Greed" "Distilled Guilt" "Distilled Ire" "Distilled Isolation" "Distilled Paranoia" "Distilled Suffering"
+	Class "Stackable Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+
+# Section 5.2.2 - Simulacrum Splinters/Simulacrum
+Show 
+	BaseType "Simulacrum Splinter"
+	Class "Stackable Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Kite
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show
+	BaseType "Simulacrum"
+	Class "Map Fragments"
+	SetTextColor 0 148 255
+	SetBackgroundColor 255 255 255
+	SetBorderColor 0 148 255
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+
+#------Section 5.3 - Essence------#
+# Section 5.3.1 - Greater Essences
+Show
+	BaseType "Greater Essence"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 2 75
+	MinimapIcon 1 Purple Circle
+	PlayEffect Purple
+	DisableDropSound
+	
+# Section 5.3.2 - Essences
+Show
+	BaseType "Essence"
+	Class "Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	PlayAlertSound 2 75
+	MinimapIcon 1 Blue Circle
+	PlayEffect Blue
+	DisableDropSound
+
+#------Section 5.4 - Expedition------#
+# Section 5.4.1 - Artifacts
+Show
+	BaseType "Black Scythe Artifact" "Broken Circle Artifact" "Order Artifact" "Sun Artifact"
+	Class "Stackable Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+
+# Section 5.4.2 - Logbooks
+Show
+	BaseType "Expedition Logbook"
+	SetTextColor 255 85 85
+	SetBackgroundColor 40 0 30
+	SetBorderColor 255 85 85
+	SetFontSize 45
+	MinimapIcon 1 Yellow UpsideDownHouse
+	PlayAlertSound 5 75
+	PlayEffect Yellow
+	DisableDropSound
+
+#------Section 5.5 - Ritual------#
+# Section 5.5.1 - Omens
+Show
+	BaseType "Omen of Amelioration" "Omen of Corruption" "Omen of Dextral Alchemy" "Omen of Dextral Annulment" "Omen of Dextral Coronation" "Omen of Dextral Erasure" "Omen of Dextral Exaltation" "Omen of Greater Annulment" "Omen of Greater Exaltation" "Omen of Refreshment" "Omen of Resurgence" "Omen of Sinistral Alchemy" "Omen of Sinistral Annulment" "Omen of Sinistral Coronation" "Omen of Sinistral Erasure" "Omen of Sinistral Exaltation" "Omen of Whittling"
+	Class "Omen"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+
+#------Section 5.6 - Sanctum (Trial of the Sekhemas)------#
+# Section 5.6.1 - Djinn Barya
+Show
+	Class "Trial Coins"
+	SetTextColor 255 85 85
+	SetBackgroundColor 40 0 30
+	SetBorderColor 255 85 85
+	SetFontSize 45
+	MinimapIcon 1 Yellow UpsideDownHouse
+	PlayAlertSound 5 50
+	PlayEffect Yellow
+	DisableDropSound
+
+# Section 5.6.2 - Relics
+Show
+	Class "Relics"
+	SetTextColor 0 240 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 0 240 190
+	SetFontSize 45
+	MinimapIcon 1 Blue Diamond
+	PlayAlertSound 3 50
+	PlayEffect Blue
+	DisableDropSound
+
+#------Section 5.7 - Ultimatum (Trial of Chaos)------#
+# Section 5.7.1 - Inscribed Ultimatums
+Show
+	BaseType "Inscribed Ultimatum"
+	SetTextColor 255 85 85
+	SetBackgroundColor 40 0 30
+	SetBorderColor 255 85 85
+	SetFontSize 45
+	MinimapIcon 1 Yellow UpsideDownHouse
+	PlayAlertSound 5 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+# Section 5.7.2 - Soul Cores
+Show
+	Class "Socketable"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 50
+	PlayEffect Red
+	DisableDropSound
+	
+############################
+# Section 7 - Rare Jewellery
+############################
+#------Section 7.1 - Amulets------#
+Show # T1
+	BaseType "Crimson Amulet" "Azure Amulet" "Amber Amulet" "Jade Amulet" "Lapis Amulet" "Lunar Amulet" "Bloodstone Amulet" "Stellar Amulet" "Solar Amulet" "Gold Amulet"
+	Rarity "Rare"
+	SetTextColor 220 220 0
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 45
+	DisableDropSound
+
+#------Section 7.2 - Rings------#
+Show # T1
+	BaseType "Golden Hoop" "Iron Ring" "Lazuli Ring" "Ruby Ring" "Sapphire Ring" "Topaz Ring" "Amethyst Ring" "Emerald Ring" "Pearl Ring" "Prismatic Ring" "Gold Ring" "Unset Ring"
+	Rarity "Rare"
+	SetTextColor 220 220 0
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 45
+	DisableDropSound
+
+#------Section 7.3 - Belts------#
+Show # T1
+	BaseType "Golden Obi" "Rawhide Belt" "Linen Belt" "Wide Belt" "Long Belt" "Plate Belt" "Ornate Belt" "Mail Belt" "Double Belt" "Heavy Belt" "Utility Belt" "Fine Belt"
+	Rarity "Rare"
+	SetTextColor 220 220 0
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 45
+	DisableDropSound
+
+#########################
+# Section 8 - Rare Armour
+#########################
+#------Section 8.1 - Helmets------#
+# Section 8.1.1 - Str Helmets
+Show # T1
+	BaseType "Expert Soldier Greathelm" "Expert Spired Greathelm" "Expert Elite Greathelm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Rusted Greathelm" "Advanced Soldier Greathelm" "Advanced Wrapped Greathelm" "Advanced Spired Greathelm" "Advanced Elite Greathelm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Rusted Greathelm" "Soldier Greathelm" "Wrapped Greathelm" "Spired Greathelm" "Elite Greathelm" "Warrior Greathelm" "Commander Greathelm" "Fierce Greathelm" "Dueling Greathelm" "Goliath Greathelm" "Guardian Greathelm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.2 - Dex Helmets
+Show # T1
+	BaseType "Expert Felt Cap" "Expert Swathed Cap" "Expert Hunter Hood"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Shabby Hood" "Advanced Felt Cap" "Advanced Lace Hood" "Advanced Swathed Cap" "Advanced Hunter Hood"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Shabby Hood" "Felt Cap" "Lace Hood" "Swathed Cap" "Hunter Hood" "Viper Cap" "Corsair Cap" "Leatherbound Hood" "Velvet Cap" "Covert Hood" "Armoured Cap"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.3 - Int Helmets
+Show # T1
+	BaseType "Expert Wicker Tiara" "Expert Chain Tiara" "Expert Feathered Tiara"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Twig Circlet" "Advanced Wicker Tiara" "Advanced Beaded Circlet" "Advanced Chain Tiara" "Advanced Feathered Tiara"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Twig Circlet" "Wicker Tiara" "Beaded Circlet" "Chain Tiara" "Feathered Tiara" "Gold Circlet" "Coral Circlet" "Jade Tiara" "Noble Circlet" "Twilight Tiara" "Magus Tiara"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.4 - Str/Dex Helmets
+Show # T1
+	BaseType "Expert Guarded Helm" "Expert Cowled Helm" "Expert Shielded Helm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Brimmed Helm" "Advanced Guarded Helm" "Advanced Visored Helm" "Advanced Cowled Helm" "Advanced Shielded Helm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Brimmed Helm" "Guarded Helm" "Visored Helm" "Cowled Helm" "Shielded Helm" "Closed Helm" "Decorated Helm" "Gallant Helm"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.5 - Str/Int Helmets
+Show # T1
+	BaseType "Expert Horned Crown" "Expert Martyr Crown" "Expert Heavy Crown"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Iron Crown" "Advanced Horned Crown" "Advanced Cultist Crown" "Advanced Martyr Crown" "Advanced Heavy Crown"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Iron Crown" "Horned Crown" "Cultist Crown" "Martyr Crown" "Heavy Crown" "Spiritbone Crown" "Lavish Crown" "Templar Crown"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.6 - Dex/Int Helmets
+Show # T1
+	BaseType "Expert Face Mask" "Expert Veiled Mask" "Expert Tribal Mask"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Hewn Mask" "Advanced Face Mask" "Advanced Hooded Mask" "Advanced Veiled Mask" "Advanced Tribal Mask"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Hewn Mask" "Face Mask" "Hooded Mask" "Veiled Mask" "Tribal Mask" "Solid Mask" "Shaded Mask" "Death Mask"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Helmets"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.1.7 - Str/Dex/Int Helmets
+Show # T1
+	BaseType "Grand Visage"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+# Section 8.1.8 - Special Helmets
+Show # T1
+	BaseType "Golden Wreath" "Golden Visage"
+	Class "Helmets"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+#------Section 8.2 - Body Armours------#
+# Section 8.2.1 - Str Body Armours
+Show # T1
+	BaseType "Expert Iron Cuirass" "Expert Steel Plate" "Expert Vaal Cuirass"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Fur Plate" "Advanced Iron Cuirass" "Advanced Maraketh Cuirass" "Advanced Steel Plate" "Advanced Full Plate" "Advanced Vaal Cuirass"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Rusted Cuirass" "Fur Plate" "Iron Cuirass" "Raider Plate" "Maraketh Cuirass" "Steel Plate" "Full Plate" "Vaal Cuirass" "Juggernaut Plate" "Chieftain Cuirass" "Colosseum Plate" "Champion Cuirass" "Glorious Plate" "Conqueror Plate" "Abyssal Cuirass"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.2 - Dex Body Armours
+Show # T1
+	BaseType "Expert Pathfinder Coat" "Expert Studded Vest" "Expert Serpentscale Coat"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Quilted Vest" "Advanced Pathfinder Coat" "Advanced Rhoahide Coat" "Advanced Studded Vest" "Advanced Scout's Vest" "Advanced Serpentscale Coat"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Leather Vest" "Quilted Vest" "Pathfinder Coat" "Shrouded Vest" "Rhoahide Coat" "Studded Vest" "Scout's Vest" "Serpentscale Coat" "Corsair Vest" "Smuggler Coat" "Strider Vest" "Hardleather Coat" "Exquisite Vest" "Mail Coat" "Armoured Vest"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.3 - Int Body Armours
+Show # T1
+	BaseType "Expert Hexer's Robe" "Expert Keth Raiment" "Expert Altar Robe"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Feathered Robe" "Advanced Hexer's Robe" "Advanced Silk Robe" "Advanced Keth Raiment" "Advanced Votive Raiment" "Advanced Altar Robe"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Tattered Robe" "Feathered Robe" "Hexer's Robe" "Bone Raiment" "Silk Robe" "Keth Raiment" "Votive Raiment" "Altar Robe" "Elementalist Robe" "Mystic Raiment" "Imperial Robe" "Plated Raiment" "Havoc Raiment" "Enlightened Robe" "Arcane Robe"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.4 - Str/Dex Body Armours
+Show # T1
+	BaseType "Expert Rogue Armour" "Expert Cloaked Mail" "Expert Cloaked Mail" "Expert Cloaked Mail" "Expert Scale Mail"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Chain Mail" "Advanced Rogue Armour" "Advanced Vagabond Armour" "Advanced Cloaked Mail" "Advanced Explorer Armour" "Advanced Scale Mail"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Chain Mail" "Rogue Armour" "Vagabond Armour" "Cloaked Mail" "Explorer Armour" "Scale Mail" "Knight Armour" "Ancestral Mail" "Lamellar Mail" "Gladiator Armour" "Heroic Armour" "Tournament Mail" "Tournament Mail" "Tournament Mail" "Slayer Armour"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.5 - Str/Int Body Armours
+Show # T1
+	BaseType "Expert Pelt Mantle" "Expert Shaman Mantle" "Expert Sacrificial Mantle"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Pilgrim Vestments" "Advanced Pelt Mantle" "Advanced Mail Vestments" "Advanced Shaman Mantle" "Advanced Ironclad Vestments" "Advanced Sacrificial Mantle"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Pilgrim Vestments" "Pelt Mantle" "Mail Vestments" "Shaman Mantle" "Ironclad Vestments" "Sacrificial Mantle" "Cleric Vestments" "Tideseer Mantle" "Gilded Vestments" "Venerated Mantle" "Revered Vestments" "Corvus Mantle" "Zenith Vestments"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.6 - Dex/Int Body Armours
+Show # T1
+	BaseType "Expert Waxed Jacket" "Expert Wayfarer Jacket" "Expert Scalper's Jacket"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Hermit Garb" "Advanced Waxed Jacket" "Advanced Marabout Garb" "Advanced Wayfarer Jacket" "Advanced Anchorite Garb" "Advanced Scalper's Jacket"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Hermit Garb" "Waxed Jacket" "Marabout Garb" "Wayfarer Jacket" "Anchorite Garb" "Scalper's Jacket" "Scoundrel Jacket" "Ascetic Garb" "Clandestine Jacket" "Monastic Garb" "Torment Jacket" "Devout Garb" "Assassin Garb"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Body Armours"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.2.7 - Str/Dex/Int Body Armours
+Show # T1
+	BaseType "Grand Regalia" "Garment"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+# Section 8.2.8 - Special Body Armours
+Show # T1
+	BaseType "Golden Mantle"
+	Class "Body Armours"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+#------Section 8.3 - Gloves------#
+# Section 8.3.1 - Str Gloves
+Show # T1
+	BaseType "Expert Riveted Mitts" "Expert Bolstered Mitts" "Expert Moulded Mitts"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Riveted Mitts" "Advanced Tempered Mitts" "Advanced Bolstered Mitts" "Advanced Moulded Mitts"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Stocky Mitts" "Riveted Mitts" "Tempered Mitts" "Bolstered Mitts" "Moulded Mitts" "Detailed Mitts" "Titan Mitts" "Grand Mitts"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.2 - Dex Gloves
+Show # T1
+	BaseType "Expert Firm Bracers" "Expert Sectioned Bracers" "Expert Spined Bracers"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Firm Bracers" "Advanced Bound Bracers" "Advanced Sectioned Bracers" "Advanced Spined Bracers"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Suede Bracers" "Firm Bracers" "Bound Bracers" "Sectioned Bracers" "Spined Bracers" "Fine Bracers" "Hardened Bracers" "Engraved Bracers"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.3 - Int Gloves
+Show # T1
+	BaseType "Expert Sombre Gloves" "Expert Jewelled Gloves" "Expert Intricate Gloves"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Sombre Gloves" "Advanced Stitched Gloves" "Advanced Jewelled Gloves" "Advanced Intricate Gloves"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Torn Gloves" "Sombre Gloves" "Stitched Gloves" "Jewelled Gloves" "Intricate Gloves" "Pauascale Gloves" "Embroidered Gloves" "Adorned Gloves"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.4 - Str/Dex Gloves
+Show # T1
+	BaseType "Expert Ringmail Gauntlets" "Expert Layered Gauntlets" "Expert Doubled Gauntlets"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Ringmail Gauntlets" "Advanced Layered Gauntlets" "Advanced Doubled Gauntlets"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Ringmail Gauntlets" "Layered Gauntlets" "Doubled Gauntlets" "Plate Gauntlets" "Burnished Gauntlets" "Ornate Gauntlets"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.5 - Str/Int Gloves
+Show # T1
+	BaseType "Expert Rope Cuffs" "Expert Aged Cuffs" "Expert Goldcast Cuffs"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Rope Cuffs" "Advanced Aged Cuffs" "Advanced Goldcast Cuffs"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Rope Cuffs" "Aged Cuffs" "Goldcast Cuffs" "Diviner Cuffs" "Righteous Cuffs" "Signet Cuffs"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.6 - Dex/Int Gloves
+Show # T1
+	BaseType "Expert Gauze Wraps" "Expert Linen Wraps" "Expert Spiral Wraps"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Gauze Wraps" "Advanced Linen Wraps" "Advanced Spiral Wraps"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Gauze Wraps" "Linen Wraps" "Spiral Wraps" "Buckled Wraps" "Furtive Wraps" "Utility Wraps"
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Gloves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.3.7 - Str/Dex/Int Gloves
+Show # T1
+	BaseType "Grand Manchettes" 
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+# Section 8.3.8 - Special Gloves
+Show # T1
+	BaseType "Golden Bracers" 
+	Class "Gloves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+#------Section 8.4 - Boots------#
+# Section 8.4.1 - Str Boots
+Show # T1
+	BaseType "Expert Iron Greaves" "Expert Trimmed Greaves" "Expert Stone Greaves"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Iron Greaves" "Advanced Bronze Greaves" "Advanced Trimmed Greaves" "Advanced Stone Greaves"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Rough Greaves" "Iron Greaves" "Bronze Greaves" "Trimmed Greaves" "Stone Greaves" "Reefsteel Greaves" "Monument Greaves" "Totemic Greaves"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.2 - Dex Boots
+Show # T1
+	BaseType "Expert Laced Boots" "Expert Steeltoe Boots" "Expert Lizardscale Boots"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Laced Boots" "Advanced Embossed Boots" "Advanced Steeltoe Boots" "Advanced Lizardscale Boots"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Rawhide Boots" "Laced Boots" "Embossed Boots" "Steeltoe Boots" "Lizardscale Boots" "Flared Boots" "Leatherplate Boots" "Embroidered Boots"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.3 - Int Boots
+Show # T1
+	BaseType "Expert Wrapped Sandals" "Expert Silk Slippers" "Expert Feathered Sandals"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Wrapped Sandals" "Advanced Lattice Sandals" "Advanced Silk Slippers" "Advanced Feathered Sandals"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Straw Sandals" "Wrapped Sandals" "Lattice Sandals" "Silk Slippers" "Feathered Sandals" "Flax Sandals" "Studded Sandals" "Elaborate Sandals"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.4 - Str/Dex Boots
+Show # T1
+	BaseType "Expert Mail Sabatons" "Expert Braced Sabatons" "Expert Stacked Sabatons"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Mail Sabatons" "Advanced Braced Sabatons" "Advanced Stacked Sabatons"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Mail Sabatons" "Braced Sabatons" "Stacked Sabatons" "Covered Sabatons" "Flexile Sabatons" "Bold Sabatons"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.5 - Str/Int Boots
+Show # T1
+	BaseType "Expert Padded Leggings" "Expert Secured Leggings" "Expert Pelt Leggings"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Padded Leggings" "Advanced Secured Leggings" "Advanced Pelt Leggings"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Padded Leggings" "Secured Leggings" "Pelt Leggings" "Weaver Leggings" "Gilt Leggings" "Pious Leggings"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.6 - Dex/Int Boots
+Show # T1
+	BaseType "Expert Frayed Shoes" "Expert Threaded Shoes" "Expert Hunting Shoes"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Frayed Shoes" "Advanced Threaded Shoes" "Advanced Hunting Shoes"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Frayed Shoes" "Threaded Shoes" "Hunting Shoes" "Steelpoint Shoes" "Velour Shoes" "Bladed Shoes"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Boots"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.4.7 - Str/Dex/Int Boots
+Show # T1
+	BaseType "Grand Cuisses"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+# Section 8.4.8 - Special Boots
+Show # T1
+	BaseType "Golden Caligae"
+	Class "Boots"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+#------Section 8.5 - Shields------#
+# Section 8.5.1 - Str Shields
+Show # T1
+	BaseType "Expert Braced Tower Shield" "Expert Rampart Tower Shield" "Expert Stone Tower Shield"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Painted Tower Shield" "Advanced Braced Tower Shield" "Advanced Effigial Tower Shield" "Advanced Rampart Tower Shield" "Advanced Heraldric Tower Shield" "Advanced Stone Tower Shield"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Splintered Tower Shield" "Painted Tower Shield" "Braced Tower Shield" "Barricade Tower Shield" "Effigial Tower Shield" "Rampart Tower Shield" "Heraldric Tower Shield" "Stone Tower Shield" "Crucible Tower Shield" "Ancestor Tower Shield" "Phalanx Tower Shield" "Defiant Tower Shield" "Blacksteel Tower Shield"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Shields"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.5.2 - Dex Shields
+Show # T1
+	BaseType "Expert Plated Buckler" "Expert Spiked Buckler" "Expert Edged Buckler"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Wooden Buckler" "Advanced Plated Buckler" "Advanced Ridged Buckler" "Advanced Spiked Buckler" "Advanced Ringed Buckler" "Advanced Edged Buckler"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Leather Buckler" "Wooden Buckler" "Plated Buckler" "Iron Buckler" "Ridged Buckler" "Spiked Buckler" "Ringed Buckler" "Edged Buckler" "Laminate Buckler" "Pearl Buckler" "Ornate Buckler" "Array Buckler" "Aegis Buckler"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Shields"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.5.4 - Str/Dex Shields
+Show # T1
+	BaseType "Expert Pelage Targe" "Expert Crescent Targe" "Expert Feathered Targe"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Hardwood Targe" "Advanced Pelage Targe" "Advanced Studded Targe" "Advanced Crescent Targe" "Advanced Chiseled Targe" "Advanced Feathered Targe"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Hardwood Targe" "Pelage Targe" "Studded Targe" "Crescent Targe" "Chiseled Targe" "Feathered Targe" "Stratified Targe" "Carved Targe" "Mosaic Targe" "Aureate Targe" "Grand Targe"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Shields"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+# Section 8.5.5 - Str/Int Shields
+Show # T1
+	BaseType "Expert Sigil Crest Shield" "Expert Jingling Crest Shield" "Expert Omen Crest Shield" 
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Blazon Crest Shield" "Advanced Sigil Crest Shield" "Advanced Emblem Crest Shield" "Advanced Jingling Crest Shield" "Advanced Sectarian Crest Shield" "Advanced Omen Crest Shield"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Blazon Crest Shield" "Sigil Crest Shield" "Emblem Crest Shield" "Jingling Crest Shield" "Sectarian Crest Shield" "Omen Crest Shield" "Wayward Crest Shield" "Seer Crest Shield" "Stoic Crest Shield" "Empyreal Crest Shield" "Deified Crest Shield"
+	Class "Shields"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Shields"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 8.6 - Foci------#
+Show # T1
+	BaseType "Expert Antler Focus" "Expert Crystal Focus" "Expert Plumed Focus"
+	Class "Foci"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Woven Focus" "Advanced Antler Focus" "Advanced Tonal Focus" "Advanced Crystal Focus" "Advanced Voodoo Focus" "Advanced Plumed Focus"
+	Class "Foci"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Twig Focus" "Woven Focus" "Antler Focus" "Engraved Focus" "Tonal Focus" "Crystal Focus" "Voodoo Focus" "Plumed Focus" "Jade Focus" "Paua Focus" "Elegant Focus" "Attuned Focus" "Magus Focus"
+	Class "Foci"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Foci"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+##########################
+# Section 9 - Rare Weapons
+##########################
+#------Section 9.1 - Bows------#
+Show # T1
+	BaseType "Expert Shortbow" "Expert Composite Bow" "Expert Warden Bow" "Expert Dualstring Bow" "Expert Cultist Bow" "Expert Zealot Bow"
+	Class "Bows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Shortbow" "Advanced Warden Bow" "Advanced Composite Bow" "Advanced Dualstring Bow" "Advanced Cultist Bow" "Advanced Zealot Bow"
+	Class "Bows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Crude Bow" "Shortbow" "Warden Bow" "Recurve Bow" "Composite Bow" "Dualstring Bow" "Cultist Bow" "Zealot Bow" "Artillery Bow" "Tribal Bow" "Greatbow" "Double Limb Bow" "Heavy Bow"
+	Class "Bows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Bows"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+	
+#------Section 9.2 - Claws------#
+#Show # T1
+#	BaseType 
+#	Class "Claws"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "Claws"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Crude Claw" "Pict Claw" "Wolfbone Claw" "Forked Claw" "Plated Claw" "Edged Claw" "Arced Claw" "Hooked Claw" "Razorglass Claw" "Sharktooth Claw" "Armoured Claw" "Piercing Claw" "Talon Claw"
+#	Class "Claws"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Claws"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.3 - Crossbows------#
+Show # T1
+	BaseType "Expert Sturdy Crossbow" "Expert Varnished Crossbow" "Expert Tense Crossbow" "Expert Dyad Crossbow" "Expert Bombard Crossbow" "Expert Forlorn Crossbow"
+	Class "Crossbows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Tense Crossbow" "Advanced Sturdy Crossbow" "Advanced Varnished Crossbow" "Advanced Dyad Crossbow" "Advanced Bombard Crossbow" "Advanced Forlorn Crossbow"
+	Class "Crossbows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Makeshift Crossbow" "Tense Crossbow" "Sturdy Crossbow" "Varnished Crossbow" "Dyad Crossbow" "Alloy Crossbow" "Bombard Crossbow" "Construct Crossbow" "Blackfire Crossbow" "Piercing Crossbow" "Cumbrous Crossbow" "Dedalian Crossbow" "Esoteric Crossbow"
+	Class "Crossbows"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Crossbows"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.4 - Daggers------#
+#Show # T1
+#	BaseType 
+#	Class "Daggers"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "Daggers"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Ethereal Blade" "Glass Shank" "Crone Knife" "Simple Dagger" "Skinning Knife" "Moon Dagger" "Engraved Knife" "Obsidian Dagger" "Bloodletting Dagger" "Mail Breaker" "Kris Knife" "Parrying Dagger" "Arcane Dirk" "Cinquedea"
+#	Class "Daggers"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Daggers"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.5 - Flails------#
+#Show # T1
+#	BaseType 
+#	Class "Flails"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "Flails"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Splintered Flail" "Chain Flail" "Holy Flail" "Iron Flail" "Twin Flail" "Slender Flail" "Stone Flail" "Ring Flail" "Guarded Flail" "Icicle Flail" "Tearing Flail" "Great Flail" "Abyssal Flail"
+#	Class "Flails"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Flails"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.6 - One Hand Axes------#
+#Show # T1
+#	BaseType 
+#	Class "One Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "One Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Dull Hatchet" "Hook Axe" "Bearded Axe" "Extended Cleaver" "Bandit Hatchet" "Crescent Axe" "Carving Hatchet" "Sacrificial Axe" "Boarding Hatchet" "Fury Cleaver" "Battle Axe" "Profane Cleaver" "Dread Hatchet"
+#	Class "One Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "One Hand Axes"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.7 - One Hand Maces------#
+Show # T1
+	BaseType "Expert Slim Mace" "Expert Plated Mace" "Expert Smithing Hammer" "Expert Warpick" "Expert Construct Hammer" "Expert Brigand Mace"
+	Class "One Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Smithing Hammer" "Advanced Slim Mace" "Advanced Warpick" "Advanced Plated Mace" "Advanced Brigand Mace" "Advanced Construct Hammer"
+	Class "One Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Wooden Club" "Smithing Hammer" "Slim Mace" "Spiked Club" "Warpick" "Plated Mace" "Brigand Mace" "Construct Hammer" "Morning Star" "Jade Club" "Lumen Mace" "Execratus Hammer" "Torment Club"
+	Class "One Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "One Hand Maces"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.8 - One Hand Swords------#
+#Show # T1
+#	BaseType 
+#	Class "One Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "One Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Golden Blade" "Energy Blade" "Shortsword" "Broadsword" "Vampiric Blade" "Scimitar" "Charred Shortsword" "Sickle Sword" "Falchion" "Treasured Blade" "Cutlass" "Runic Shortsword" "Messer" "Commander Sword" "Dark Blade"
+#	Class "One Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "One Hand Swords"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.9 - Quarterstaves------#
+Show # T1
+	BaseType "Expert Gothic Quarterstaff" "Expert Crescent Quarterstaff" "Expert Long Quarterstaff" "Expert Crackling Quarterstaff" "Expert Barrier Quarterstaff" "Expert Slicing Quarterstaff"
+	Class "Quarterstaves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Long Quarterstaff" "Advanced Gothic Quarterstaff" "Advanced Crackling Quarterstaff" "Advanced Crescent Quarterstaff" "Advanced Slicing Quarterstaff" "Advanced Barrier Quarterstaff"
+	Class "Quarterstaves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Wrapped Quarterstaff" "Long Quarterstaff" "Gothic Quarterstaff" "Crackling Quarterstaff" "Crescent Quarterstaff" "Steelpoint Quarterstaff" "Slicing Quarterstaff" "Barrier Quarterstaff" "Hefty Quarterstaff" "Smooth Quarterstaff" "Anima Quarterstaff" "Graceful Quarterstaff" "Wyrm Quarterstaff"
+	Class "Quarterstaves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Quarterstaves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+	
+#------Section 9.10 - Quivers------#
+#Show # T1
+#	BaseType 
+#	Class "Quivers"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+
+Show # T2
+	BaseType "Broadhead Quiver" "Fire Quiver" "Sacral Quiver" "Two-Point Quiver" "Blunt Quiver" "Toxic Quiver" "Serrated Quiver" "Primed Quiver" "Penetrating Quiver" "Volant Quiver" "Visceral Quiver"
+	Class "Quivers"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+#Show # T3
+#	BaseType 
+#	Class "Quivers"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Quivers"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.11 - Sceptres------#
+#Show # T1
+#	BaseType 
+#	Class "Sceptres"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+
+Show # T2
+	BaseType "Rattling Sceptre" "Stoic Sceptre" "Lupine Sceptre" "Omen Sceptre" "Ochre Sceptre" "Shrine Sceptre" "Shrine Sceptre" "Shrine Sceptre" "Devouring Sceptre" "Clasped Sceptre" "Devotional Sceptre" "Wrath Sceptre" "Aromatic Sceptre" "Pious Sceptre" "Hallowed Sceptre"
+	Class "Sceptres"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+#Show # T3
+#	BaseType 
+#	Class "Sceptres"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Sceptres"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.12 - Spears------#
+#Show # T1
+#	BaseType 
+#	Class "Spears"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "Spears"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Hardwood Spear" "Ironhead Spear" "Hunting Spear" "Winged Spear" "War Spear" "Forked Spear" "Barbed Spear" "Broad Spear" "Crossblade Spear" "Seaglass Spear" "Sword Spear" "Striking Spear" "Helix Spear"
+#	Class "Spears"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Spears"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.13 - Staves------#
+#Show # T1
+#	BaseType 
+#	Class "Staves"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+
+Show # T2
+	BaseType "Ashen Staff" "Gelid Staff" "Voltaic Staff" "Spriggan Staff" "Pyrophyte Staff" "Chiming Staff" "Rending Staff" "Reaping Staff" "Icicle Staff" "Roaring Staff" "Paralysing Staff" "Cleric Staff" "Dark Staff"
+	Class "Staves"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+#Show # T3
+#	BaseType 
+#	Class "Staves"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Staves"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.14 - Traps------#
+#Show # T1
+#	BaseType 
+#	Class "Traps"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType "Clay Trap" "Clamping Trap" "Shrapnel Trap" "Urn Trap" "Incense Trap" "Bladed Trap" "Dart Trap" "Spike Trap" "Coiled Trap" "Lead Trap" "Medallion Trap" "Intricate Trap" "Refined Trap"
+#	Class "Traps"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType 
+#	Class "Traps"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Traps"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.15 - Two Hand Axes------#
+#Show # T1
+#	BaseType 
+#	Class "Two Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType "Splitting Greataxe" "Light Halberd" "Executioner Greataxe" "Arched Greataxe" "Elegant Glaive" "Savage Greataxe" "Rending Halberd" "Jagged Greataxe" "Reaver Glaive" "Ember Greataxe" "Ceremonial Halberd" "Monument Greataxe" "Vile Greataxe"
+#	Class "Two Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType 
+#	Class "Two Hand Axes"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Two Hand Axes"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.16 - Two Hand Maces------#
+Show # T1
+	BaseType "Expert Forge Maul" "Expert Temple Maul" "Expert Oak Greathammer" "Expert Cultist Greathammer" "Expert Crumbling Maul" "Expert Leaden Greathammer"
+	Class "Two Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 0 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T2
+	BaseType "Advanced Oak Greathammer" "Advanced Forge Maul" "Advanced Cultist Greathammer" "Advanced Temple Maul" "Advanced Leaden Greathammer" "Advanced Crumbling Maul"
+	Class "Two Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+Show # T3
+	BaseType "Felled Greatclub" "Oak Greathammer" "Forge Maul" "Studded Greatclub" "Cultist Greathammer" "Temple Maul" "Leaden Greathammer" "Crumbling Maul" "Pointed Maul" "Totemic Greatclub" "Greatmace" "Precise Greathammer" "Giant Maul"
+	Class "Two Hand Maces"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	DisableDropSound
+
+#Show # Untiered
+#	BaseType 
+#	Class "Two Hand Maces"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.17 - Two Hand Swords------#
+#Show # T1
+#	BaseType 
+#	Class "Two Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T2
+#	BaseType 
+#	Class "Two Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 220 220 0
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # T3
+#	BaseType "Energy Blade" "Corroded Longsword" "Iron Greatsword" "Blessed Claymore" "Broad Greatsword" "Rippled Greatsword" "Arced Longsword" "Stone Greatsword" "Obsidian Greatsword" "Keen Greatsword" "Ancient Greatblade" "Flanged Greatblade" "Regalia Longsword" "Ultra Greatsword"
+#	Class "Two Hand Swords"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Two Hand Swords"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#------Section 9.18 - Wands------#
+#Show # T1
+#	BaseType 
+#	Class "Wands"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 0 0
+#	SetFontSize 40
+#	DisableDropSound
+
+Show # T2
+	BaseType "Withered Wand" "Bone Wand" "Attuned Wand" "Siphoning Wand" "Volatile Wand" "Galvanic Wand" "Acrid Wand" "Offering Wand" "Frigid Wand" "Torture Wand" "Critical Wand" "Primordial Wand" "Dueling Wand"
+	Class "Wands"
+	Rarity "Rare"
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 40
+	DisableDropSound
+
+#Show # T3
+#	BaseType 
+#	Class "Wands"
+#	Rarity "Rare"
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 255 255 255
+#	SetFontSize 40
+#	DisableDropSound
+#
+#Show # Untiered
+#	BaseType 
+#	Class "Wands"
+#	Rarity "Rare"
+#	SetFontSize 35
+#	DisableDropSound
+
+#####################
+# Section 10 - Jewels
+#####################
+Show # Rare
+	BaseType "Emerald" "Diamond" "Ruby" "Sapphire" "Time-Lost Emerald" "Time-Lost Diamond" "Time-Lost Ruby" "Time-Lost Sapphire"
+	Class "Jewels"
+	Rarity "Rare"
+	SetTextColor 220 220 0
+	SetBackgroundColor 0 0 0
+	SetBorderColor 220 220 0
+	SetFontSize 45
+	DisableDropSound
+
+Show # Magic
+	BaseType "Emerald" "Diamond" "Ruby" "Sapphire" "Time-Lost Emerald" "Time-Lost Diamond" "Time-Lost Ruby" "Time-Lost Sapphire"
+	Class "Jewels"
+	Rarity "Magic"
+	SetTextColor 0 75 250
+	SetBackgroundColor 0 0 0
+	SetBorderColor 0 75 250
+	SetFontSize 45
+	DisableDropSound
+
+##############################
+# Section 12 - Flasks & Charms
+##############################
+#------Section 12.1 - Life Flasks------#
+Show
+	BaseType "Ultimate Life Flask"
+	Class "Life Flasks"
+	SetBorderColor 188 23 5
+	SetBackgroundColor 0 0 0
+	SetFontSize 35
+	DisableDropSound
+	
+Show
+	Class "Life Flasks"
+	SetBorderColor 188 23 5
+	DisableDropSound
+
+#------Section 12.2 - Mana Flasks------#
+Show
+	BaseType "Ultimate Mana Flask"
+	Class "Mana Flasks"
+	SetBorderColor 0 75 250
+	SetBackgroundColor 0 0 0
+	SetFontSize 35
+	DisableDropSound
+	
+Show
+	Class "Mana Flasks"
+	SetBorderColor 0 75 250
+	DisableDropSound
+	
+#------Section 12.3 - Charms------#
+Show
+	BaseType "Thawing Charm" "Staunching Charm" "Antidote Charm" "Dousing Charm" "Grounding Charm" "Stone Charm" "Silver Charm" "Ruby Charm" "Sapphire Charm" "Topaz Charm" "Amethyst Charm" "Golden Charm"
+	Class "Charms"
+	SetBorderColor 188 23 5
+	SetBackgroundColor 0 0 0
+	SetFontSize 40
+	DisableDropSound
+	
+###################
+# Section 13 - Gems
+###################
+#------Section 13.1 - Uncut Gems------#
+# Section 13.1.1 - Uncut Skill Gems
+Show
+	BaseType "Uncut Skill Gem"
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan Temp
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+# Section 13.1.2 - Uncut Support Gems
+Show
+	BaseType "Uncut Support Gem"
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan Temp
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+
+# Section 13.1.3 - Uncut Spirit Gems
+Show
+	BaseType "Uncut Spirit Gem"
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan Temp
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+
+#------Section 13.2 - Cut Gems------#
+# Section 13.2.1 - Skill Gems
+Show
+	Class "Skill Gems"
+	SetTextColor 20 240 240
+	SetBackgroundColor 6 0 60
+	SetBorderColor 20 240 240
+	SetFontSize 45
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+
+# Section 13.2.2 - Support Gems
+Show
+	Class "Support Gems"
+	SetTextColor 20 240 240
+	SetBackgroundColor 6 0 60
+	SetBorderColor 20 240 240
+	SetFontSize 45
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+
+#######################################
+# Section 15 - Vendor Recipes/Salvaging
+#######################################
+#------Section 15.1 - Salvaging------#
+Show
+	Sockets "1" "2" "3"
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+
+###################
+# Section 15 - Misc
+###################
+#------Section 15.1 - Quest Items------#
+Show
+	Class "Quest Items"
+	SetTextColor 0 209 10
+	SetBackgroundColor 0 0 0
+	SetBorderColor 0 209 10
+	SetFontSize 45
+	DisableDropSound
+	
+#------Section 15.2 - Fishing------#
+Show
+	Class "Fishing Rods"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 75
+	PlayEffect Red
+	DisableDropSound
+
+#########################
+# Section 16 - Catch Alls
+#########################
+#------Section 16.1 - Hide Normal/Magic Jewellery, Armour and Weapons------#
+Show # Armour (RULE DISABLED)
+	Class "Rings" "Amulets" "Belts"
+	Rarity "Normal" "Magic"
+	DisableDropSound
+	
+Show # Armour (RULE DISABLED)
+	Class "Helmets" "Body Armours" "Gloves" "Boots" "Shields" "Foci"
+	Rarity "Normal" "Magic"
+	DisableDropSound
+
+Show # Weapons (RULE DISABLED)
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Spears" "Flails" "Bows" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Quarterstaves" "Crossbows" "Traps"
+	Rarity "Normal" "Magic"
+	DisableDropSound
+
+#------Section 16.2 - Hide Rare Jewellery, Armour and Weapons------#
+Show # Armour (RULE DISABLED)
+	Class "Rings" "Amulets" "Belts"
+	Rarity "Rare"
+	DisableDropSound
+	
+Show # Armour (RULE DISABLED)
+	Class "Helmets" "Body Armours" "Gloves" "Boots" "Shields" "Foci"
+	Rarity "Rare"
+	DisableDropSound
+
+Show # Weapons (RULE DISABLED)
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Spears" "Flails" "Bows" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Quarterstaves" "Crossbows" "Traps"
+	Rarity "Rare"
+	DisableDropSound
+
+#------Section 16.3 - Show All------#
+Show # Catch-All - should NEVER be reached, please contact icedragn on Discord if this rule is reached
+	SetTextColor 0 0 0
+	SetBackgroundColor 247 0 255
+	SetBorderColor 247 0 255
+	SetFontSize 45
+	PlayAlertSound 10 75
+	DisableDropSound
