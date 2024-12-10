@@ -2626,6 +2626,21 @@ Show # Magic
 	SetFontSize 45
 	DisableDropSound
 
+####################
+# Section 11 - Runes
+####################
+Show
+	BaseType "Desert Rune" "Glacial Rune" "Storm Rune" "Iron Rune" "Body Rune" "Mind Rune" "Rebirth Rune" "Inspiration Rune" "Stone Rune" "Vision Rune"
+	Class "Socketable"
+	SetTextColor 0 0 0
+	SetBackgroundColor 130 214 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Yellow Circle
+	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
 ##############################
 # Section 12 - Flasks & Charms
 ##############################
