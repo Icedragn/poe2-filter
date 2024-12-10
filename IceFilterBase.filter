@@ -823,6 +823,7 @@ Show
 	
 # Section 5.7.2 - Soul Cores
 Show
+	BaseType "Soul Core of Tacati" "Soul Core of Opiloti" "Soul Core of Jiquani" "Soul Core of Zalatl" "Soul Core of Citaqualotl" "Soul Core of Puhuarte" "Soul Core of Tzamoto" "Soul Core of Xopec" "Soul Core of Azcapa" "Soul Core of Topotante" "Soul Core of Quipolatl" "Soul Core of Ticaba" "Soul Core of Atmohua" "Soul Core of Cholotl" "Soul Core of Zantipi"
 	Class "Socketable"
 	SetTextColor 0 0 0
 	SetBackgroundColor 0 148 255
