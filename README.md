@@ -1,7 +1,7 @@
 # PoE2 Filter Base
 General bare-bones filter base for PoE2, edit to your own liking and enjoy!
 
-Current version: 0.1.1
+Current version: 0.1.2
 
 Filter features:
 - Highlights based on NeverSink's Azurite theme
