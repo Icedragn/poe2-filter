@@ -1,7 +1,7 @@
 #------------------------------------------------#
-# Icedragn's PoE2 Filter Base - Updated 2024/12/10
+# Icedragn's PoE2 Filter Base - Updated 2024/12/11
 # AUTHOR: Icedragn
-# VERSION: 0.1.3
+# VERSION: 0.1.4
 #------------------------------------------------#
 
 #---------------------------------------------#
@@ -153,6 +153,10 @@
 	# Section 13.2 - Cut Gems
 		# Section 13.2.1 - Skill Gems
 		# Section 13.2.2 - Support Gems
+# Section 14 - Vendor Recipes/Salvaging
+	# Section 14.1 - Salvaging
+		# Section 14.1.1 - Socketed Items
+		# Section 14.1.2 - Quality Items/Flasks
 # Section 15 - Misc
 	# Section 15.1 - Quest Items
 	# Section 15.2 - Fishing
@@ -2684,66 +2688,110 @@ Show
 # Section 13 - Gems
 ###################
 #------Section 13.1 - Uncut Gems------#
+#------Section 13.1 - Uncut Gems------#
 # Section 13.1.1 - Uncut Skill Gems
-Show
+Show # High Level (16+)
+	BaseType "Uncut Skill Gem"
+	ItemLevel >= 16
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Mid Level (9-15)
+	BaseType "Uncut Skill Gem"
+	ItemLevel >= 9
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Low Level (1-8)
 	BaseType "Uncut Skill Gem"
 	SetTextColor 30 190 190
 	SetBackgroundColor 0 0 0
 	SetBorderColor 30 190 190
 	SetFontSize 40
-	PlayEffect Cyan Temp
+	PlayEffect Cyan
 	MinimapIcon 1 Cyan Triangle
 	DisableDropSound
 	
 # Section 13.1.2 - Uncut Support Gems
-Show
+Show # High Level (3)
+	BaseType "Uncut Support Gem"
+	ItemLevel >= 3
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Mid Level (2)
+	BaseType "Uncut Support Gem"
+	ItemLevel >= 2
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Low Level (1)
 	BaseType "Uncut Support Gem"
 	SetTextColor 30 190 190
 	SetBackgroundColor 0 0 0
 	SetBorderColor 30 190 190
 	SetFontSize 40
-	PlayEffect Cyan Temp
+	PlayEffect Cyan
 	MinimapIcon 1 Cyan Triangle
 	DisableDropSound
 
 # Section 13.1.3 - Uncut Spirit Gems
-Show
+Show # High Level (16+)
+	BaseType "Uncut Spirit Gem"
+	ItemLevel >= 16
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Mid Level (9-15)
+	BaseType "Uncut Spirit Gem"
+	ItemLevel >= 9
+	SetTextColor 30 190 190
+	SetBackgroundColor 0 0 0
+	SetBorderColor 30 190 190
+	SetFontSize 40
+	PlayEffect Cyan
+	MinimapIcon 1 Cyan Triangle
+	DisableDropSound
+	
+Show # Low Level (1-8)
 	BaseType "Uncut Spirit Gem"
 	SetTextColor 30 190 190
 	SetBackgroundColor 0 0 0
 	SetBorderColor 30 190 190
 	SetFontSize 40
-	PlayEffect Cyan Temp
-	MinimapIcon 1 Cyan Triangle
-	DisableDropSound
-
-#------Section 13.2 - Cut Gems------#
-# Section 13.2.1 - Skill Gems
-Show
-	Class "Skill Gems"
-	SetTextColor 20 240 240
-	SetBackgroundColor 6 0 60
-	SetBorderColor 20 240 240
-	SetFontSize 45
-	PlayEffect Cyan
-	MinimapIcon 1 Cyan Triangle
-	DisableDropSound
-
-# Section 13.2.2 - Support Gems
-Show
-	Class "Support Gems"
-	SetTextColor 20 240 240
-	SetBackgroundColor 6 0 60
-	SetBorderColor 20 240 240
-	SetFontSize 45
 	PlayEffect Cyan
 	MinimapIcon 1 Cyan Triangle
 	DisableDropSound
 
 #######################################
-# Section 15 - Vendor Recipes/Salvaging
+# Section 14 - Vendor Recipes/Salvaging
 #######################################
-#------Section 15.1 - Salvaging------#
+#------Section 14.1 - Salvaging------#
 Show
 	Sockets "1" "2" "3"
 	SetTextColor 255 255 255
