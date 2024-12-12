@@ -6,7 +6,7 @@ Current version: 0.1.3
 Filter features:
 - Highlights based on NeverSink's Azurite theme
 - Basic currency and item tiering
-- Socketed items for salvaging
+- Socketed and quality items for salvaging
 - Separated highlighting for all item types, easily configurable to fit your goals
 - Basic item tier highlighting for all item bases (expert, advanced, normal)
 
