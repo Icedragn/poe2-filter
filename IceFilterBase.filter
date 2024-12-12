@@ -2845,8 +2845,18 @@ Show # Large Socketed Items 2-3 Sockets
 	DisableDropSound
 	
 # Section 14.1.2 - Quality Items
-Show # Weapons
-	Class "Claws" "Daggers" "Wands" "One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Spears" "Flails" "Bows" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Quarterstaves" "Crossbows" "Traps" "Quivers"
+Show # Attack Weapons (Blacksmith's Whetstones)
+	Class "Claws" "Daggers" "One Hand Swords" "One Hand Axes" "One Hand Maces" "Spears" "Flails" "Bows" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Quarterstaves" "Crossbows" "Quivers"
+	Quality >= 5
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+
+Show # Caster Weapons (Arcanist's Etchers)
+	Class "Wands" "Sceptres" "Staves" "Traps"
 	Quality >= 5
 	SetTextColor 255 255 255
 	SetBackgroundColor 0 0 0
@@ -2855,7 +2865,7 @@ Show # Weapons
 	PlayEffect White Temp
 	DisableDropSound
 	
-Show # Armour
+Show # Armour (Armourer's Scraps)
 	Class "Helmets" "Body Armours" "Gloves" "Boots" "Shields" "Foci"
 	Quality >= 5
 	SetTextColor 255 255 255
