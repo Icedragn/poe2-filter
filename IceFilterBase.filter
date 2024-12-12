@@ -159,7 +159,8 @@
 		# Section 14.1.2 - Quality Items/Flasks
 # Section 15 - Misc
 	# Section 15.1 - Quest Items
-	# Section 15.2 - Fishing
+	# Section 15.2 - Trial of Sekhema Keys
+	# Section 15.3 - Fishing
 # Section 16 - Catch Alls
 	# Section 16.1 - Hide Normal/Magic Jewellery, Armour and Weapons (RULES DISABLED)
 	# Section 16.2 - Hide Rare Jewellery, Armour and Weapons (RULES DISABLED)
@@ -280,6 +281,15 @@ Show # Medium Stacks
 
 Show # Small Stacks
 	BaseType "Gold"
+	StackSize >= 10
+	Class "Stackable Currency"
+	SetTextColor 255 204 0
+	SetBorderColor 255 204 0
+	DisableDropSound
+
+Show # Early Zone Low Gold
+	BaseType "Gold"
+	AreaLevel < 10
 	Class "Stackable Currency"
 	SetTextColor 255 204 0
 	SetBorderColor 255 204 0
@@ -2804,8 +2814,29 @@ Show # Low Level (1-8)
 # Section 14 - Vendor Recipes/Salvaging
 #######################################
 #------Section 14.1 - Salvaging------#
-Show
+# Section 14.1.1 - Socketed Items
+Show # Small Socketed Items
 	Sockets "1" "2" "3"
+	Height <= 2
+	Width <= 2
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+	
+Show # Large Socketed Items 1 Socket
+	Sockets "2" "3"
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+	
+Show # Large Socketed Items 2-3 Sockets
+	Sockets "2" "3"
 	SetTextColor 255 255 255
 	SetBackgroundColor 0 0 0
 	SetBorderColor 255 255 255
@@ -2825,7 +2856,17 @@ Show
 	SetFontSize 45
 	DisableDropSound
 	
-#------Section 15.2 - Fishing------#
+#------Section 15.2 - Trial of Sekhema Keys------#
+Show
+	BaseType "Gold Key" "Silver Key" "Bronze Key"
+	Class "Stackable Currency"
+	SetTextColor 0 209 10
+	SetBackgroundColor 0 0 0
+	SetBorderColor 0 209 10
+	SetFontSize 45
+	DisableDropSound
+
+#------Section 15.3 - Fishing------#
 Show
 	Class "Fishing Rods"
 	SetTextColor 0 0 0
