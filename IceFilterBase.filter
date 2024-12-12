@@ -568,9 +568,21 @@ Show
 	DisableDropSound
 
 #------Section 3.5 - White Waystones------#
-Show
+Show # T2+
 	Class "Waystones"
-	WaystoneTier >= 1
+	WaystoneTier >= 2
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 45
+	PlayAlertSound 4 75
+	MinimapIcon 1 White Square
+	PlayEffect White
+	DisableDropSound
+	
+Show # T1
+	Class "Waystones"
+	WaystoneTier = 1
 	SetTextColor 255 255 255
 	SetBackgroundColor 0 0 0
 	SetBorderColor 255 255 255
