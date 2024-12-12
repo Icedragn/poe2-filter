@@ -156,7 +156,7 @@
 # Section 14 - Vendor Recipes/Salvaging
 	# Section 14.1 - Salvaging
 		# Section 14.1.1 - Socketed Items
-		# Section 14.1.2 - Quality Items/Flasks
+		# Section 14.1.2 - Quality Items
 # Section 15 - Misc
 	# Section 15.1 - Quest Items
 	# Section 15.2 - Trial of Sekhema Keys
@@ -2837,6 +2837,27 @@ Show # Large Socketed Items 1 Socket
 	
 Show # Large Socketed Items 2-3 Sockets
 	Sockets "2" "3"
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+	
+# Section 14.1.2 - Quality Items
+Show # Weapons
+	Class "Claws" "Daggers" "Wands" "One Hand Swords" "One Hand Axes" "One Hand Maces" "Sceptres" "Spears" "Flails" "Bows" "Staves" "Two Hand Swords" "Two Hand Axes" "Two Hand Maces" "Quarterstaves" "Crossbows" "Traps" "Quivers"
+	Quality >= 5
+	SetTextColor 255 255 255
+	SetBackgroundColor 0 0 0
+	SetBorderColor 255 255 255
+	SetFontSize 40
+	PlayEffect White Temp
+	DisableDropSound
+	
+Show # Armour
+	Class "Helmets" "Body Armours" "Gloves" "Boots" "Shields" "Foci"
+	Quality >= 5
 	SetTextColor 255 255 255
 	SetBackgroundColor 0 0 0
 	SetBorderColor 255 255 255
