@@ -677,8 +677,20 @@ Show
 	DisableDropSound
 
 # Section 5.1.3 - Catalysts
-Show
-	BaseType "Adaptive Catalyst" "Carapace Catalyst" "Chayula's Catalyst" "Esh's Catalyst" "Flesh Catalyst" "Neural Catalyst" "Reaver Catalyst" "Sibilant Catalyst" "Skittering Catalyst" "Tul's Catalyst" "Uul-Netol's Catalyst" "Xoph's Catalyst"
+#Show # T1
+#	BaseType 
+#	Class "Stackable Currency"
+#	SetTextColor 0 0 0
+#	SetBackgroundColor 130 214 255
+#	SetBorderColor 0 0 0
+#	SetFontSize 45
+#	MinimapIcon 1 Yellow Circle
+#	PlayAlertSound 2 50
+#	PlayEffect Yellow
+#	DisableDropSound
+
+Show # T2
+	BaseType "Chayula's Catalyst" "Esh's Catalyst" "Neural Catalyst" "Tul's Catalyst" "Xoph's Catalyst"
 	Class "Stackable Currency"
 	SetTextColor 0 0 0
 	SetBackgroundColor 130 214 255
@@ -687,6 +699,17 @@ Show
 	MinimapIcon 1 Yellow Circle
 	PlayAlertSound 2 50
 	PlayEffect Yellow
+	DisableDropSound
+	
+Show # T3
+	BaseType "Adaptive Catalyst" "Carapace Catalyst" "Flesh Catalyst" "Reaver Catalyst" "Sibilant Catalyst" "Skittering Catalyst" "Uul-Netol's Catalyst"
+	Class "Stackable Currency"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+#	MinimapIcon 1 White Circle
+	PlayEffect White Temp
 	DisableDropSound
 
 #------Section 5.2 - Delirium------#
