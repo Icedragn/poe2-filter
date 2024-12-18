@@ -714,15 +714,46 @@ Show # T3
 
 #------Section 5.2 - Delirium------#
 # Section 5.2.1 - Distilled Emotions
-Show
-	BaseType "Distilled Despair" "Distilled Disgust" "Distilled Envy" "Distilled Fear" "Distilled Greed" "Distilled Guilt" "Distilled Ire" "Distilled Isolation" "Distilled Paranoia" "Distilled Suffering"
-	Class "Stackable Currency"
+Show # T1
+	BaseType "Distilled Fear" "Distilled Suffering" "Distilled Isolation"
+	SetTextColor 0 148 255
+	SetBackgroundColor 255 255 255
+	SetBorderColor 0 148 255
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+
+Show # T2
+	BaseType "Distilled Despair" "Distilled Disgust"
+	SetTextColor 0 0 0
+	SetBackgroundColor 0 148 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 75
+	PlayEffect Red
+	DisableDropSound
+
+Show # T3
+	BaseType "Distilled Paranoia" "Distilled Envy" 
 	SetTextColor 0 0 0
 	SetBackgroundColor 130 214 255
 	SetBorderColor 0 0 0
 	SetFontSize 45
 	MinimapIcon 1 Yellow Circle
 	PlayAlertSound 2 50
+	PlayEffect Yellow
+	DisableDropSound
+	
+Show # T4
+	BaseType "Distilled Greed" "Distilled Guilt" "Distilled Ire"
+	SetTextColor 0 0 0
+	SetBackgroundColor 61 156 136
+	SetBorderColor 0 0 0
+	SetFontSize 45
+#	MinimapIcon 1 White Circle
 	PlayEffect Yellow
 	DisableDropSound
 
