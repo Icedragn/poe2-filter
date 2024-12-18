@@ -281,7 +281,7 @@ Show # Medium Stacks
 
 Show # Small Stacks
 	BaseType "Gold"
-	StackSize >= 10
+	StackSize >= 2
 	Class "Stackable Currency"
 	SetTextColor 255 204 0
 	SetBorderColor 255 204 0
@@ -289,7 +289,7 @@ Show # Small Stacks
 
 Show # Early Zone Low Gold
 	BaseType "Gold"
-	AreaLevel < 10
+	AreaLevel < 24
 	Class "Stackable Currency"
 	SetTextColor 255 204 0
 	SetBorderColor 255 204 0
