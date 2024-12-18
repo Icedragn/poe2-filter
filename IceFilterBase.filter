@@ -785,6 +785,18 @@ Show
 #------Section 5.3 - Essence------#
 # Section 5.3.1 - Greater Essences
 Show
+	BaseType "Greater Essence of Haste" "Greater Essence of Ruin" "Greater Essence of Sorcery" "Greater Essence of Torment"
+	Class "Currency"
+	SetTextColor 0 148 255
+	SetBackgroundColor 255 255 255
+	SetBorderColor 0 148 255
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+
+Show
 	BaseType "Greater Essence"
 	Class "Currency"
 	SetTextColor 0 0 0
