@@ -1,7 +1,7 @@
 # PoE2 Filter Base
 General bare-bones filter base for PoE2, edit to your own liking and enjoy!
 
-Current version: 0.1.4
+Current version: 0.2.1
 
 Filter features:
 - Highlights based on NeverSink's Azurite theme
@@ -9,6 +9,7 @@ Filter features:
 - Socketed and quality items for salvaging
 - Separated highlighting for all item types, easily configurable to fit your goals
 - Basic item tier highlighting for all item bases (expert, advanced, normal)
+- Basic item tiering for valuable drops
 
 Filter TODOs:
 - Tiered drop highlighting (not functionally available yet to my knowledge)

@@ -1,7 +1,7 @@
 #------------------------------------------------#
-# Icedragn's PoE2 Filter Base - Updated 2024/12/11
+# Icedragn's PoE2 Filter Base - Updated 2024/12/18
 # AUTHOR: Icedragn
-# VERSION: 0.1.4
+# VERSION: 0.2.1
 #------------------------------------------------#
 
 #---------------------------------------------#
@@ -784,7 +784,7 @@ Show
 
 #------Section 5.3 - Essence------#
 # Section 5.3.1 - Greater Essences
-Show
+Show # T1
 	BaseType "Greater Essence of Haste" "Greater Essence of Ruin" "Greater Essence of Sorcery" "Greater Essence of Torment"
 	Class "Currency"
 	SetTextColor 0 148 255
@@ -796,7 +796,7 @@ Show
 	PlayEffect Red
 	DisableDropSound
 
-Show
+Show # T2
 	BaseType "Greater Essence"
 	Class "Currency"
 	SetTextColor 0 0 0
