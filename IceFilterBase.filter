@@ -31,7 +31,10 @@
 # Section 2 - Currency
 	# Section 2.1 - Gold
 	# Section 2.1 - Single Currency
-	# Section 2.2 - Stacked Currency (TODO?)
+	# Section 2.3 - Stacked Currency (TODO?)
+	# Section 2.4 - Boss Fragments
+		# Section 2.4.1 - Pinnacle Keys
+		# Section 2.4.2 - Map Fragments
 # Section 3 - Waystones & Tablets
 	# Section 3.1 - Unique Waystones
 	# Section 3.2 - T14+ Waystones
@@ -511,7 +514,7 @@ Show
 	SetFontSize 30
 	DisableDropSound
 	
-#------Section 2.2 - Stacked Currency------# (TODO)
+#------Section 2.3 - Stacked Currency------# (TODO)
 Show
 	BaseType "Scroll of Wisdom"
 	Class "Currency"
@@ -522,6 +525,31 @@ Show
 	SetFontSize 45
 	DisableDropSound
 	
+#------Section 2.4 - Boss Fragments------#
+# Section 2.4.1 - Pinnacle Keys
+Show
+	Class "Pinnacle Keys"
+	SetTextColor 0 0 0
+	SetBackgroundColor 180 0 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 75
+	PlayEffect Red
+	DisableDropSound
+	
+# Section 2.4.2 - Map Fragments
+Show
+	Class "Map Fragments"
+	SetTextColor 0 0 0
+	SetBackgroundColor 180 0 255
+	SetBorderColor 0 0 0
+	SetFontSize 45
+	MinimapIcon 1 Red Circle
+	PlayAlertSound 1 75
+	PlayEffect Red
+	DisableDropSound
+
 #################################
 # Section 3 - Waystones & Tablets
 #################################
