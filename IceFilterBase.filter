@@ -2806,7 +2806,19 @@ Show
 #------Section 13.1 - Uncut Gems------#
 #------Section 13.1 - Uncut Gems------#
 # Section 13.1.1 - Uncut Skill Gems
-Show # High Level (16+)
+Show # Higest Level (20+)
+	BaseType "Uncut Skill Gem"
+	ItemLevel >= 20
+	SetTextColor 30 190 190
+	SetBackgroundColor 255 255 255
+	SetBorderColor 30 190 190
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+	
+Show # High Level (16-19)
 	BaseType "Uncut Skill Gem"
 	ItemLevel >= 16
 	SetTextColor 30 190 190
@@ -2872,7 +2884,19 @@ Show # Low Level (1)
 	DisableDropSound
 
 # Section 13.1.3 - Uncut Spirit Gems
-Show # High Level (16+)
+Show # Higest Level (20+)
+	BaseType "Uncut Spirit Gem"
+	ItemLevel >= 20
+	SetTextColor 30 190 190
+	SetBackgroundColor 255 255 255
+	SetBorderColor 30 190 190
+	SetFontSize 45
+	MinimapIcon 0 Red Star
+	PlayAlertSound 6 75
+	PlayEffect Red
+	DisableDropSound
+
+Show # High Level (16-19)
 	BaseType "Uncut Spirit Gem"
 	ItemLevel >= 16
 	SetTextColor 30 190 190
