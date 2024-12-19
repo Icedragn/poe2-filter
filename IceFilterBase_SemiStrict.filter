@@ -228,13 +228,33 @@
 #------Section 1.1 - Custom Highlights------#
 	
 #------Section 1.2 - Priority Bases------#
-#Show
-#	BaseType "Vermillion Ring" "Amethyst Ring"
-#	ItemLevel >= 68
-#	Rarity <= "Rare"
-#	SetTextColor 255 255 255
+#Show # Weapon Bases
+#	BaseType "Expert Crescent Quarterstaff" "Expert Gothic Quarterstaff" #"Expert Barrier Quarterstaff"
+#	ItemLevel >= 65
+#	Rarity < "Rare"
+#	SetTextColor 0 148 255
 #	SetBackgroundColor 0 0 0
-#	SetBorderColor 255 255 255
+#	SetBorderColor 0 148 255
+#	SetFontSize 40
+#	DisableDropSound
+#	
+#Show # Armour Bases
+#	BaseType "Expert Wayfarer Jacket" "Expert Scalper's Jacket" "Expert Studded Vest" "Expert Tribal Mask" "Expert Feathered Tiara" "Expert Hunting Shoes" "Expert Lizardscale Boots" "Expert Spiral Wraps" "Expert Spined Bracers"
+#	ItemLevel >= 65
+#	Rarity < "Rare"
+#	SetTextColor 0 148 255
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 0 148 255
+#	SetFontSize 40
+#	DisableDropSound
+#	
+#Show # Jewellery Bases
+#	BaseType "Fine Belt" "Utility Belt" "Golden Obi" "Ruby Ring" "Sapphire Ring" "Topaz Ring" "Amethyst Ring"  "Prismatic Ring" "Gold Ring" "Gold Amulet" "Bloodstone Amulet" "Amber Amulet" "Stellar Amulet" "Jade Amulet" "Lapis Amulet"
+#	ItemLevel >= 65
+#	Rarity < "Rare"
+#	SetTextColor 0 148 255
+#	SetBackgroundColor 0 0 0
+#	SetBorderColor 0 148 255
 #	SetFontSize 40
 #	DisableDropSound
 
