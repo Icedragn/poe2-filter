@@ -2767,12 +2767,13 @@ Show
 Show
 	BaseType "Ultimate Life Flask"
 	Class "Life Flasks"
+	Rarity "Magic"
 	SetBorderColor 188 23 5
 	SetBackgroundColor 0 0 0
 	SetFontSize 35
 	DisableDropSound
 	
-Show
+Hide
 	Class "Life Flasks"
 	SetBorderColor 188 23 5
 	DisableDropSound
@@ -2781,12 +2782,13 @@ Show
 Show
 	BaseType "Ultimate Mana Flask"
 	Class "Mana Flasks"
+	Rarity "Magic"
 	SetBorderColor 0 75 250
 	SetBackgroundColor 0 0 0
 	SetFontSize 35
 	DisableDropSound
 	
-Show
+Hide
 	Class "Mana Flasks"
 	SetBorderColor 0 75 250
 	DisableDropSound
